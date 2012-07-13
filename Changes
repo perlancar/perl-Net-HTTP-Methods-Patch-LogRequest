@@ -1,5 +1,10 @@
 Revision history for Net-HTTP-Methods-patch-log_request
 
+0.02    2012-07-13 (SHARYANTO)
+
+        No functional changes. Change log message format. Update/fix POD.
+
+
 0.01    2012-07-13 (SHARYANTO)
 
         First release.

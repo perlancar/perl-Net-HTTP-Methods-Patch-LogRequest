@@ -17,7 +17,7 @@ my $p_log_request = sub {
     my $res = $orig->(@_);
 
     my $log = Log::Any->get_logger;
-    $log->tracef("HTTP request: %s", $res);
+    $log->tracef("HTTP request (%s bytes):\n%s", length($res), $res);
     $res;
 };
 
@@ -41,7 +41,6 @@ sub patch_data {
 
 =head1 SYNOPSIS
 
- use Net::HTTP::Methods;
  use Net::HTTP::Methods::patch::log_request
    -on_unknown_version => 'warn',
    -on_conflict        => 'warn';
@@ -55,9 +54,9 @@ sub patch_data {
 
 =head1 DESCRIPTION
 
-This module patches LWP::Protocol::http so that raw HTTP request is logged using
-L<Log::Any>. If you look into LWP::Protocol::http's source code, you'll see that
-it is already doing that (albeit commented):
+This module patches Net::HTTP::Methods so that raw LWP HTTP request is logged
+using L<Log::Any>. If you look into LWP::Protocol::http's source code, you'll
+see that it is already doing that (albeit commented):
 
   my $req_buf = $socket->format_request($method, $fullpath, @h);
   #print "------\n$req_buf\n------\n";
@@ -67,6 +66,7 @@ it is already doing that (albeit commented):
 
 =head2 Why not subclass?
 
-By patching, you do not need to replace all the client code which uses LWP.
+By patching, you do not need to replace all the client code which uses LWP (or
+WWW::Mechanize, etc).
 
 =cut

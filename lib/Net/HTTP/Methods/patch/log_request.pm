@@ -42,8 +42,7 @@ sub patch_data {
 =head1 SYNOPSIS
 
  use Net::HTTP::Methods::patch::log_request
-   -on_unknown_version => 'warn',
-   -on_conflict        => 'warn';
+   -on_unknown_version => 'warn';
 
  # now all your LWP HTTP requests are logged
 

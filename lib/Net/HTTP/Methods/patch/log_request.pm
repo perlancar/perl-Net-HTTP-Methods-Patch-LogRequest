@@ -17,7 +17,7 @@ my $p_log_request = sub {
     my $res = $orig->(@_);
 
     my $log = Log::Any->get_logger;
-    $log->tracef("HTTP request (%s bytes):\n%s", length($res), $res);
+    $log->tracef("HTTP request (%d bytes):\n%s", length($res), $res);
     $res;
 };
 

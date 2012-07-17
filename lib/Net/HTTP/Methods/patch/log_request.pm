@@ -4,7 +4,8 @@ use 5.010001;
 use strict;
 no warnings;
 
-use parent qw(Module::Patch);
+use Module::Patch 0.07 ();
+use base qw(Module::Patch);
 
 # VERSION
 
@@ -13,6 +14,7 @@ our %config;
 my $p_log_request = sub {
     require Log::Any;
 
+    my $ctx = shift;
     my $orig = shift;
     my $res = $orig->(@_);
 
@@ -26,16 +28,15 @@ my $p_log_request = sub {
 
 sub patch_data {
     return {
-        config => {
-        },
-        versions => {
-            # LWP is at 6.04, Net::HTTP 6.03, Net::HTTP::Methods still at 6.00
-            '6.00' => {
-                subs => {
-                    format_request => $p_log_request,
-                },
+        v => 2,
+        patches => [
+            {
+                action      => 'wrap',
+                mod_version => qr/^6\.0.*/,
+                sub_name    => 'format_request',
+                code        => $p_log_request,
             },
-        },
+        ],
     };
 }
 

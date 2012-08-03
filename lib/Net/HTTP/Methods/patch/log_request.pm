@@ -4,7 +4,7 @@ use 5.010001;
 use strict;
 no warnings;
 
-use Module::Patch 0.07 ();
+use Module::Patch 0.10 qw();
 use base qw(Module::Patch);
 
 # VERSION
@@ -15,7 +15,7 @@ my $p_log_request = sub {
     require Log::Any;
 
     my $ctx = shift;
-    my $orig = shift;
+    my $orig = $ctx->{orig};
     my $res = $orig->(@_);
 
     my $proto = ref($_[0]) =~ /^LWP::Protocol::(\w+)::/ ? $1 : "?";
@@ -28,7 +28,7 @@ my $p_log_request = sub {
 
 sub patch_data {
     return {
-        v => 2,
+        v => 3,
         patches => [
             {
                 action      => 'wrap',

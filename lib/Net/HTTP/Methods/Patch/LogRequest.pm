@@ -1,10 +1,10 @@
-package Net::HTTP::Methods::patch::log_request;
+package Net::HTTP::Methods::Patch::LogRequest;
 
 use 5.010001;
 use strict;
 no warnings;
 
-use Module::Patch 0.10 qw();
+use Module::Patch 0.12 qw();
 use base qw(Module::Patch);
 
 # VERSION
@@ -41,20 +41,20 @@ sub patch_data {
 }
 
 1;
-# ABSTRACT: Patch module for Net::HTTP::Methods
+# ABSTRACT: Log raw HTTP requests
 
 =head1 SYNOPSIS
 
- use Net::HTTP::Methods::patch::log_request;
+ use Net::HTTP::Methods::Patch::LogRequest;
 
  # now all your LWP HTTP requests are logged
 
 Sample script and output:
 
  % LOG_SHOW_CATEGORY=1 TRACE=1 perl -MLog::Any::App \
-   -MNet::HTTP::Methods::patch::log_request -MWWW::Mechanize \
+   -MNet::HTTP::Methods::Patch::LogRequest -MWWW::Mechanize \
    -e'$mech=WWW::Mechanize->new; $mech->get("http://www.google.com/")'
- [cat Net.HTTP.Methods.patch.log_request][23] HTTP request (142 bytes):
+ [cat Net.HTTP.Methods.Patch.LogRequest][23] HTTP request (142 bytes):
  GET / HTTP/1.1
  TE: deflate,gzip;q=0.3
  Connection: TE, close
@@ -62,7 +62,7 @@ Sample script and output:
  Host: www.google.com
  User-Agent: WWW-Mechanize/1.71
 
- [cat Net.HTTP.Methods.patch.log_request][70] HTTP request (144 bytes):
+ [cat Net.HTTP.Methods.Patch.LogRequest][70] HTTP request (144 bytes):
  GET / HTTP/1.1
  TE: deflate,gzip;q=0.3
  Connection: TE, close

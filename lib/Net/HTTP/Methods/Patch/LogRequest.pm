@@ -52,6 +52,8 @@ sub patch_data {
 1;
 # ABSTRACT: Log raw HTTP requests
 
+=for Pod::Coverage ^(patch_data)$
+
 =head1 SYNOPSIS
 
  use Net::HTTP::Methods::Patch::LogRequest;

@@ -21,8 +21,17 @@ my $p_log_request = sub {
     my $proto = ref($_[0]) =~ /^LWP::Protocol::(\w+)::/ ? $1 : "?";
 
     my $log = Log::Any->get_logger;
-    $log->tracef("HTTP request (proto=%s, len=%d):\n%s",
-                 $proto, length($res), $res);
+    if ($log->is_trace) {
+
+        # there is no equivalent of caller_depth in Log::Any, so we do this only
+        # for Log4perl
+        local $Log::Log4perl::caller_depth = $Log::Log4perl::caller_depth + 1
+            if $Log::{"Log4perl::"};
+
+        $log->tracef("HTTP request (proto=%s, len=%d):\n%s",
+                     $proto, length($res), $res);
+
+    }
     $res;
 };
 

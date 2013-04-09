@@ -13,6 +13,7 @@ our %config;
 
 my $p_log_request = sub {
     require Log::Any;
+    my $log = Log::Any->get_logger;
 
     my $ctx = shift;
     my $orig = $ctx->{orig};
@@ -20,7 +21,6 @@ my $p_log_request = sub {
 
     my $proto = ref($_[0]) =~ /^LWP::Protocol::(\w+)::/ ? $1 : "?";
 
-    my $log = Log::Any->get_logger;
     if ($log->is_trace) {
 
         # there is no equivalent of caller_depth in Log::Any, so we do this only
@@ -28,9 +28,8 @@ my $p_log_request = sub {
         local $Log::Log4perl::caller_depth = $Log::Log4perl::caller_depth + 1
             if $Log::{"Log4perl::"};
 
-        $log->tracef("HTTP request (proto=%s, len=%d):\n%s",
+        $log->tracef("HTTP request (proto=%s, len(headers)=%d):\n%s",
                      $proto, length($res), $res);
-
     }
     $res;
 };
@@ -46,7 +45,7 @@ sub patch_data {
                 code        => $p_log_request,
             },
         ],
-    };
+   };
 }
 
 1;
@@ -98,5 +97,9 @@ see that it is already doing that (albeit commented):
 
 By patching, you do not need to replace all the client code which uses LWP (or
 WWW::Mechanize, etc).
+
+=head2 How to log request content?
+
+See L<LWP::UserAgent::Patch::LogRequestContent>.
 
 =cut

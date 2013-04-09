@@ -11,7 +11,7 @@ use base qw(Module::Patch);
 
 our %config;
 
-my $p_log_request = sub {
+my $p_format_request = sub {
     require Log::Any;
     my $log = Log::Any->get_logger;
 
@@ -42,7 +42,7 @@ sub patch_data {
                 action      => 'wrap',
                 mod_version => qr/^6\.0.*/,
                 sub_name    => 'format_request',
-                code        => $p_log_request,
+                code        => $p_format_request,
             },
         ],
    };

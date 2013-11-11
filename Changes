@@ -7,37 +7,37 @@ Revision history for Net-HTTP-Methods-Patch-LogRequest
 
 0.07    2012-08-09 (SHARYANTO)
 
-        Rename module
-        Net::HTTP::Methods::{patch::log_request,Patch::LogRequest}.
+        - Rename module
+          Net::HTTP::Methods::{patch::log_request,Patch::LogRequest}.
 
 
 0.06    2012-08-03 (SHARYANTO)
 
-        No functional changes. Adjust to Module::Patch 0.10 (v=3).
+        - No functional changes. Adjust to Module::Patch 0.10 (v=3).
 
 
 0.05    2012-07-17 (SHARYANTO)
 
-        No functional changes. Adjust to Module::Patch 0.07 (v=2).
+        - No functional changes. Adjust to Module::Patch 0.07 (v=2).
 
 
 0.04    2012-07-13 (SHARYANTO)
 
-        No functional changes. Tweak log message (add proto).
+        - No functional changes. Tweak log message (add proto).
 
 
 0.03    2012-07-13 (SHARYANTO)
 
-        No functional changes. Update Synopsis to reflect improvements in
-        Module::Patch 0.06.
+        - No functional changes. Update Synopsis to reflect improvements in
+          Module::Patch 0.06.
 
 
 0.02    2012-07-13 (SHARYANTO)
 
-        No functional changes. Tweak log message (add request length).
-        Update/fix POD.
+        - No functional changes. Tweak log message (add request length).
+          Update/fix POD.
 
 
 0.01    2012-07-13 (SHARYANTO)
 
-        First release.
+        - First release.

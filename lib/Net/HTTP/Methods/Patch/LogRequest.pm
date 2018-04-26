@@ -7,7 +7,7 @@ use 5.010001;
 use strict;
 no warnings;
 
-use Module::Patch 0.12 qw();
+use Module::Patch;
 use base qw(Module::Patch);
 
 our %config;
@@ -43,7 +43,7 @@ sub patch_data {
         patches => [
             {
                 action      => 'wrap',
-                mod_version => qr/^6\.0.*/,
+                mod_version => qr/^6\.*/,
                 sub_name    => 'format_request',
                 code        => $p_format_request,
             },
